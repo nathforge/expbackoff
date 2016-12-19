@@ -33,10 +33,12 @@ API
       ``random.random``.
 
 -  ``backoff.sleep()``: If failures have occurred, sleep for
-   ``backoff.seconds``
+   ``backoff.get_seconds_with_jitter()``
 -  ``backoff.update(success)``: Update the failure count by passing a
    boolean representing success.
--  ``backoff.seconds``: The current backoff time in seconds, with jitter
+-  ``backoff.get_seconds_with_jitter()``: The current backoff time in seconds, with jitter
+   applied. Zero if there are no recorded failures. Read-only.
+-  ``backoff.get_raw_seconds()``: The current backoff time in seconds, *without* jitter
    applied. Zero if there are no recorded failures. Read-only.
 -  ``backoff.failures``: The current number of failures. Read-only.
 

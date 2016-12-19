@@ -7,7 +7,7 @@ from setuptools import setup
 os.chdir(os.path.abspath(os.path.dirname(__file__)))
 
 setup(
-    version="0.1.0",
+    version="0.1.1",
     url="https://github.com/nathforge/expbackoff",
     name="expbackoff",
     description="Exponential backoff with jitter.",

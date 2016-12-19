@@ -19,17 +19,13 @@ class Backoff(object):
         self.random = random
 
     def sleep(self):
-        time.sleep(self.seconds)
+        time.sleep(self.get_seconds_with_jitter())
 
     def update(self, success):
         if success:
             self.failures = max(0, self.failures - 1)
         else:
             self.failures += 1
-
-    @property
-    def seconds(self):
-        return self._apply_full_jitter(self._get_raw_seconds())
 
     @property
     def failures(self):
@@ -41,7 +37,10 @@ class Backoff(object):
             raise ValueError("Expected positive integer, received {!r}".format(failures))
         self._failures = failures
 
-    def _get_raw_seconds(self):
+    def get_seconds_with_jitter(self):
+        return self._apply_full_jitter(self.get_raw_seconds())
+
+    def get_raw_seconds(self):
         if self._failures == 0:
             return 0
         else:
